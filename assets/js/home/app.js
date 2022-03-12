@@ -1,0 +1,33 @@
+const studentsTable = document.querySelector("table#studentsTable")
+
+const studentsData = localStorage.students??"[]"
+
+let students = JSON.parse(studentsData)
+
+if(!students || students.length < 1){
+  document.querySelector("h2.message").style.display = "block"
+}else{
+  students.forEach(student => {
+    studentsTable.tBodies[0].innerHTML += `
+      <tr>
+      <td>${student.name}</td>
+      <td>${student.phone}</td>
+      <td>${student.xp ? "Possui" : "Não possui"}</td>
+      <td>
+        <button class="btn btn-secondary" onclick="handleExclude(${student.id})>Editar</button>
+        <button class="btn btn-danger" onclick="handleExclude(${student.id})">Excluir</button>
+      </td>
+      </tr>
+    `
+  })
+}
+
+function handleChange(id){
+  student = students.filter(item => item.id == id).key
+}
+
+function handleExclude(id){
+  students = students.filter(item => item.id != id)
+  localStorage.students = JSON.stringify(students)
+  location.reload()
+}
