@@ -14,7 +14,7 @@ if(!students || students.length < 1){
       <td>${student.phone}</td>
       <td>${student.xp ? "Possui" : "Não possui"}</td>
       <td>
-        <button class="btn btn-secondary" onclick="handleExclude(${student.id})>Editar</button>
+        <button class="btn btn-secondary" onclick="handleChange(${student.id})">Editar</button>
         <button class="btn btn-danger" onclick="handleExclude(${student.id})">Excluir</button>
       </td>
       </tr>
@@ -23,7 +23,9 @@ if(!students || students.length < 1){
 }
 
 function handleChange(id){
-  student = students.filter(item => item.id == id).key
+  let uri = location.href.replace(/index/, "form")
+  uri += `?id=${id}`
+  location = uri
 }
 
 function handleExclude(id){
