@@ -8,15 +8,19 @@ if(!students || students.length < 1){
   document.querySelector("h2.message").style.display = "block"
 }else{
   students.forEach(student => {
+
+    let maskedPhone = student.phone.replace(/\D/g, '').match(/(\d{2})(\d{5})(\d{4})/)
+    maskedPhone = `(${maskedPhone[1]}) ${maskedPhone[2]}-${maskedPhone[3]}`
+
     studentsTable.tBodies[0].innerHTML += `
-      <tr>
-      <td>${student.name}</td>
-      <td>${student.phone}</td>
-      <td>${student.xp ? "Possui" : "Não possui"}</td>
-      <td>
-        <button class="btn btn-secondary" onclick="handleChange(${student.id})">Editar</button>
-        <button class="btn btn-danger" onclick="handleExclude(${student.id})">Excluir</button>
-      </td>
+      <tr class="${student.xp ? "green" : "red"}">
+        <td>${student.name}</td>
+        <td>${maskedPhone}</td>
+        <td>${student.xp ? "Sim" : "Não"}</td>
+        <td>
+          <button class="btn btn-secondary" onclick="handleChange(${student.id})">Editar</button>
+          <button class="btn btn-danger" onclick="handleExclude(${student.id})">Excluir</button>
+        </td>
       </tr>
     `
   })
