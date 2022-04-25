@@ -22,8 +22,13 @@ function handleSubmit(){
   const phone = form.phone.value
   const xp = form.xp.value == "true"
 
-  if(phone.length < 11 || phone.length > 11 || /^[0-9]*$/.test(phone) == false){
+  if(phone.length < 11 || phone.length > 11){
     alert("Número inválido");
+    return;
+  }
+
+  if(/^[0-9]*$/.test(phone) == false){
+    alert("Apenas núemros no campo \"Telefone\"")
     return;
   }
 
