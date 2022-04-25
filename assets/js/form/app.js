@@ -17,18 +17,37 @@ if(location.search.length > 0){
   form.phone.value = student[0].phone
 }
 
+function handlePhoneChange(e){
+  e.preventDefault()
+  const inputValue = e.target.value
+  if(inputValue.length == 0){
+    e.target.value += "(";
+  }
+  if(inputValue.length == 3){
+    e.target.value += ")";
+  }
+
+  if(inputValue.length == 9){
+    e.target.value += "-";
+  }
+
+  if(/[0-9]/g.test(e.key) && e.target.value.length < 14){
+    e.target.value += e.key;
+  }
+}
+
 function handleSubmit(){
   const name = form.name.value
   const phone = form.phone.value
   const xp = form.xp.value == "true"
 
-  if(phone.length < 11 || phone.length > 11){
+  if(phone.length !== 14){
     alert("Número inválido");
     return;
   }
 
-  if(/^[0-9]*$/.test(phone) == false){
-    alert("Apenas núemros no campo \"Telefone\"")
+  if(/^[0-9-()]*$/.test(phone) == false){
+    alert("Apenas números no campo \"Telefone\"")
     return;
   }
 
