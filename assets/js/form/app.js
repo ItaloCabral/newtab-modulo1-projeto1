@@ -22,7 +22,7 @@ function handleSubmit(){
   const phone = form.phone.value
   const xp = form.xp.value == "true"
 
-  if(phone.length < 11){
+  if(phone.length < 11 || phone.length > 11 || /^[0-9]*$/.test(phone) == false){
     alert("Número inválido");
     return;
   }
