@@ -22,6 +22,11 @@ function handleSubmit(){
   const phone = form.phone.value
   const xp = form.xp.value == "true"
 
+  if(phone.length < 11){
+    alert("Número inválido");
+    return;
+  }
+
   if(location.search.length > 0){
     const urlParams = new URLSearchParams(location.search)
     const id = Number(urlParams.get("id"))
@@ -46,7 +51,6 @@ function handleSubmit(){
 
   localStorage.students = JSON.stringify([...students, newStudent])
 
-  form.name.value = ""
-  form.phone.value = ""
+  location = location.href.replace(/form/, "index")
 }
 
